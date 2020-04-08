@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Intro</title>
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="text-right m-2">
+      cart: {{ cart }}
+    </div>
+
+    <div class="d-flex justify-content-center m-5" v-if="!isLogin">
+      <form @submit.prevent="login">
+        <input type="text" placeholder="username" v-model="user.username" required>
+        <input type="password" placeholder="password" v-model="user.password" required>
+        <button>submit</button>
+      </form>
+    </div>
+
+    <div v-else>
+      <!-- order page -->
+      <div class="container" v-if="!isCheckoutPage">
+        <div class="row">
+          <div class="col-4">
+            <img :src="image" :alt="productName" style="width: 100%;">
+            <div>
+              <div 
+                v-for="variant in variants" 
+                :key="variant.id" 
+                v-on:click="selectVariant(variant)"
+                class="color-box"
+                :style="{ 'background-color': variant.color}">
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <h2><b>{{ productFullName }}</b></h2>
+            <p v-if="stock > 10">Ready Stok</p>
+            <p v-else-if="stock <= 10 && stock > 0">Stock Limited</p>
+            <p v-else>Sold Out</p>
+  
+            <ul>
+              <li v-for="(item, index) in descriptions" :key="index">{{ item }}</li>
+            </ul>
+  
+            <button @click="addToCart">Add to cart</button>
+            <button @click="checkout">Checkout</button>
+          </div>
+        </div>
+      </div>
+      <!-- end of order page -->
+  
+      <!-- checkout page -->
+      <div class="container" v-else>
+        <h2>Thankyou for your order!</h2>
+      </div>
+      <!-- end of checkout page -->
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
