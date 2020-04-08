@@ -32,7 +32,9 @@ var app = new Vue({
     user: {
       username: '',
       password: ''
-    }
+    },
+    products: [],
+    category: ''
   },
   computed: {
     productFullName() {
@@ -65,6 +67,57 @@ var app = new Vue({
       this.user.username = ''
       this.user.password = ''
       this.isLogin = true
+      this.getProducts()
+    },
+    getProducts() {
+      let filter = ''
+      if (this.category) {
+        filter = `category=${this.category}`
+      }
+
+      axios.get(`http://localhost:3000/products?${filter}`)
+        .then(result => {
+          this.products = result.data
+        })
+    },
+    logout () {
+      localStorage.clear()
+      this.isLogin = false
     }
+  },
+  watch: {
+    category () {
+      this.getProducts()
+    }
+  },
+  // vue lifecycle
+  beforeCreate() {
+    console.log('beforeCreate')
+    console.log('beforeCreate >>>>>>', this.productName)
+  },
+  created() {
+    if (localStorage.token) {
+      this.isLogin = true
+      this.getProducts()
+    }
+
+  },
+  beforeMount() {
+    console.log('beforeMount')
+  },
+  mounted() {
+    console.log('mounted')
+  },
+  // beforeUpdate() {
+  //   console.log('beforeUpdate')
+  // },
+  // updated() {
+  //   console.log('updated')
+  // },
+  beforeDestroy() {
+    console.log('beforeDestroy')
+  },
+  destroy() {
+    console.log('destroy')
   }
 })

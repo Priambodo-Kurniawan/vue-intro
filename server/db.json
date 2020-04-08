@@ -1,0 +1,54 @@
+{
+  "user": {
+    "username": "arnold",
+    "password": "hacktivdelapan"
+  },
+  "products": [
+    {
+      "id": 1,
+      "productName": "Masker Kain",
+      "productBrand": "Hacktiv8",
+      "image": "image/masker-abu.jpg",
+      "category": "healthy",
+      "stock": 8,
+      "descriptions": [
+        "Masker penunjang kesehatan",
+        "Ringan & nyaman digunakan",
+        "Tidak buat sesak nafas dan efektif menghalangi debu serta dapat di cuci",
+        "Cocok untuk penggunaan diluar ruangan ataupun di dalam ruangan",
+        "Material : Kain katu"
+      ],
+      "variants": [
+        {
+          "id": 1,
+          "color": "gray",
+          "image": "image/masker-abu.jpg",
+          "stock": 0
+        },
+        {
+          "id": 2,
+          "color": "purple",
+          "image": "image/masker-ungu.jpg",
+          "stock": 20
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "productName": "Hand Sanitizer",
+      "productBrand": "Hacktiv8",
+      "category": "liquid",
+      "image": "image/handsanitizer.jpg",
+      "stock": 18,
+      "descriptions": [
+        "Gel pembersih tangan",
+        "Digunakan sebagai antiseptik cuci tangan tanpa bilas air",
+        "Sangat efektif untuk mencegah infeksi",
+        "Ditambahkan bahan pelembut kulit sehingga tangan tidak terasa kering dan kasar, tidak lengket di tangan, bau fresh yang tidak membosankan",
+        "Sangat sesuai digunakan di rumah sakit, salon, klinik, puskesmas, kantor, toko, pabrik, emergency room maupun di rumah tempat tinggal"
+      ],
+      "variants": [
+      ]
+    }
+  ]
+}

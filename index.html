@@ -10,6 +10,7 @@
 </head>
 <body>
   <div id="app">
+    <button @click="logout">logout</button>
     <div class="text-right m-2">
       cart: {{ cart }}
     </div>
@@ -23,47 +24,63 @@
     </div>
 
     <div v-else>
-      <!-- order page -->
-      <div class="container" v-if="!isCheckoutPage">
-        <div class="row">
-          <div class="col-4">
-            <img :src="image" :alt="productName" style="width: 100%;">
-            <div>
-              <div 
-                v-for="variant in variants" 
-                :key="variant.id" 
-                v-on:click="selectVariant(variant)"
-                class="color-box"
-                :style="{ 'background-color': variant.color}">
-              </div>
-            </div>
-          </div>
-          <div class="col-8">
-            <h2><b>{{ productFullName }}</b></h2>
-            <p v-if="stock > 10">Ready Stok</p>
-            <p v-else-if="stock <= 10 && stock > 0">Stock Limited</p>
-            <p v-else>Sold Out</p>
-  
-            <ul>
-              <li v-for="(item, index) in descriptions" :key="index">{{ item }}</li>
-            </ul>
-  
-            <button @click="addToCart">Add to cart</button>
-            <button @click="checkout">Checkout</button>
-          </div>
+
+      <select v-model="category">
+        <option value="">all category</option>
+        <option value="healthy">healthy</option>
+        <option value="liquid">liquid</option>
+      </select>
+      <div class="row">
+        <div class="col-3" v-for="product in products">
+          <img :src="product.image" alt="" style="width: 100%;">
+          <h4>{{ product.productName }}</h4>
         </div>
       </div>
-      <!-- end of order page -->
-  
-      <!-- checkout page -->
-      <div class="container" v-else>
-        <h2>Thankyou for your order!</h2>
+
+      <div v-if="false">
+        <!-- order page -->
+        <div class="container" v-if="!isCheckoutPage">
+          <div class="row">
+            <div class="col-4">
+              <img :src="image" :alt="productName" style="width: 100%;">
+              <div>
+                <div 
+                  v-for="variant in variants" 
+                  :key="variant.id" 
+                  v-on:click="selectVariant(variant)"
+                  class="color-box"
+                  :style="{ 'background-color': variant.color}">
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <h2><b>{{ productFullName }}</b></h2>
+              <p v-if="stock > 10">Ready Stok</p>
+              <p v-else-if="stock <= 10 && stock > 0">Stock Limited</p>
+              <p v-else>Sold Out</p>
+    
+              <ul>
+                <li v-for="(item, index) in descriptions" :key="index">{{ item }}</li>
+              </ul>
+    
+              <button @click="addToCart">Add to cart</button>
+              <button @click="checkout">Checkout</button>
+            </div>
+          </div>
+        </div>
+        <!-- end of order page -->
+    
+        <!-- checkout page -->
+        <div class="container" v-else>
+          <h2>Thankyou for your order!</h2>
+        </div>
+        <!-- end of checkout page -->
       </div>
-      <!-- end of checkout page -->
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
